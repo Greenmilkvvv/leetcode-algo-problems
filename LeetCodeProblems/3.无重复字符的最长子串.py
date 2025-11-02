@@ -48,20 +48,27 @@ class Solution:
 
         # return ans
 
+    # ========================
+    # 我喜欢的解法 
+    # 滑动窗口遍历
         ans = 0
-        curstr = '' # 用于提取一个子串 每个字符只出现一次且保持顺序 相当于对无重复字符的切片作遍历
+        window = '' # 用于提取一个子串 每个字符只出现一次且保持顺序 相当于对无重复字符的切片作遍历
         
         # 对于每一个字符
         for i in s: 
-            # 如果 i 不在当前子串中，则添加到子串中，并更新答案
-            if i not in curstr: 
-                curstr = curstr + i
-                ans = max(ans, len(curstr))
-            # 如果 i 在当前子串中，则从当前子串中删除 i 之前的字符，并添加 i
+
+            # 如果不在窗口中 则扩张窗口
+            if i not in window: 
+                window = window + i 
+            
+            # 如果在窗口中 则选出新窗口
             else: 
-                while curstr and curstr[0] != i:
-                    curstr = curstr[1:]
-                curstr = curstr[1:] + i
+                while (i in window): 
+                    window = window[1:]
+                window = window + i
+            
+            # 选出最大的窗口长度
+            ans = max(ans, len(window))
         
         return ans
 
