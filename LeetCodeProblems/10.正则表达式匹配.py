@@ -32,29 +32,6 @@ class Solution:
 
     def isMatch(self, s: str, p: str) -> bool:
 
-        # m, n = len(s), len(p)
-        # # dp[i][j] 表示 s[:i] 与 p[:j] 是否匹配
-        # # 创建一个初始表 初始全为 False
-        # dp = [[False] * (n + 1) for _ in range(m + 1)]
-        # # 使用 n+1 是因为, 对于两个字符串, 空串也是匹配的, 留一行一列给空字符串
-        # dp[0][0] = True
-
-        # # 初始化 s 为空串时，p 靠 a*b*c* 这类可以匹配
-        # for j in range(2, n + 1):
-        #     dp[0][j] = dp[0][j - 2] if p[j - 1] == '*' else False
-
-        # for i in range(1, m + 1):
-        #     for j in range(1, n + 1):
-        #         if p[j - 1] == '*':
-        #             # 0 次：看 dp[i][j-2]
-        #             # >=1 次：必须 p[j-2] 能匹配 s[i-1]，且看 dp[i-1][j]
-        #             dp[i][j] = dp[i][j - 2] or (
-        #                 dp[i - 1][j] if (p[j - 2] == '.' or p[j - 2] == s[i - 1]) else False)
-        #         else:
-        #             dp[i][j] = dp[i - 1][j - 1] if (p[j - 1] == '.' or p[j - 1] == s[i - 1]) else False
-
-        # return dp[m][n]
-
         m, n = len(s), len(p) 
 
         # 初始化 dp 表 dp[i][j] 表示 s[:i] 与 p[:j] 是否匹配 (True / False)
@@ -80,13 +57,18 @@ class Solution:
             for j in range(1, n+1): 
 
                 if p[j-1] == "*": 
+
                     # 0次, 看 dp[i][j-2]==True
                     # >=1次，必定要求 s[i-1] 与 p[j-2] 相匹配, 且 dp[i-1][j] == True
-                    ## 
-                    
 
+                    dp[i][j] = dp[i][j-2] or ( 
+                       dp[i-1][j] if ( p[j-2] == '.' or s[i-1] == p[j-2] ) else False 
+                    )                   
                 
+                else: 
+                    dp[i][j] = dp[i-1][j-1] if (p[j-1] == '.' or s[i-1] == p[j-1]) else False
 
+        return dp[m][n]
 
 # @lc code=end
 
