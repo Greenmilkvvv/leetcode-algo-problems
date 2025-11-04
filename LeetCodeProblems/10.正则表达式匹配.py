@@ -81,11 +81,11 @@ class Solution:
 
                 if p[j-1] == "*": 
                     # 0次, 看 dp[i][j-2]==True
-                    # >=1次, 看 (dp[i-1][j]==True and (s[i-1] 和 p[j-2] 要匹配 or p[j-2] == '.')) 
-                    dp[i][j] = ( dp[i][j-2]==True ) or (True if (dp[i-1][j]==True and ( p[j-2]==s[i-1] or p[j-2]=='.' )) else False)
+                    # >=1次，必定要求 s[i-1] 与 p[j-2] 相匹配, 且 dp[i-1][j] == True
+                    ## 
+                    
 
-                if p[j-1] == '.': 
-                    # 如要 True 则 dp[i][j-1] 必须为 True 且
+                
 
 
 # @lc code=end
