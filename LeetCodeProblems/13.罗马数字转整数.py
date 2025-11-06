@@ -23,46 +23,56 @@ class Solution:
 
 
 
-            if len(s) >= 4 and s[::-1][0:4][::-1] == roman2 + roman1 * 3:
+            if len(s) >= 4 and s[-4:] == roman2 + roman1 * 3:
                 num += 8 * 10**i
-                s = s[::-1][4:][::-1]
+                s = s[:-4]
+                continue
 
 
 
-             
-            if len(s) >= 3 and s[::-1][0:3][::-1] == roman1 * 3:
+            if len(s) >= 3 and s[-3:] == roman1 * 3:
                 num += 3 * 10**i
-                s = s[::-1][3:][::-1]
+                s = s[:-3]
+                continue
 
-            elif len(s) >= 3 and s[::-1][0:2][::-1] == roman2 + roman1 * 2:
+            elif len(s) >= 3 and s[-3:] == roman2 + roman1 * 2:
                 num += 7 * 10**i
-                s = s[::-1][3:][::-1]
+                s = s[:-3]
+                continue
 
 
                 
-            if len(s) >= 2 and s[::-1][0:2][::-1] == roman1 * 2:
+            if len(s) >= 2 and s[-2:] == roman1 * 2:
                 num += 2 * 10**i
-                s = s[::-1][2:][::-1]
+                s = s[:-2]
+                continue
 
-            elif len(s) >= 2 and s[::-1][0:2][::-1] == roman1 + roman2:
+            elif len(s) >= 2 and s[-2:] == roman1 + roman2:
                 num += 4 * 10**i
-                s = s[::-1][2:][::-1]
+                s = s[:-2]
+                continue
 
-            elif len(s) >= 2 and s[::-1][0:2][::-1] == roman2 + roman1:
+            elif len(s) >= 2 and s[-2:] == roman2 + roman1:
                 num += 6 * 10**i
-                s = s[::-1][2:][::-1]
+                s = s[:-2]
+                continue
 
-            elif len(s) >= 2 and s[::-1][0:2][::-1] == roman1 + roman3:
+            elif len(s) >= 2 and s[-2:] == roman1 + roman3:
                 num += 9 * 10**i
-                s = s[::-1][2:][::-1]
+                s = s[:-2]
+                continue
 
 
                     
-            if len(s) >= 1 and s[::-1][0:1][::-1] == roman1:
+            if len(s) >= 1 and s[-1:] == roman1:
                 num += 1 * 10**i
-                s = s[::-1][1:][::-1]
-            elif len(s) >= 1 and s[::-1][0:1][::-1] == roman2:
+                s = s[:-1]
+                continue
+
+            elif len(s) >= 1 and s[-1:] == roman2:
                 num += 5 * 10**i
+                s = s[:-1]
+                continue
 
         return num
 
