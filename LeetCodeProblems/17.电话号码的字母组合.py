@@ -20,27 +20,21 @@ class Solution:
             '9': ['w', 'x', 'y', 'z']
         }
 
-        # 先查出 digits 能够产出多少组合
-        lengths = [len( mapping[num] ) for num in digits]
+        # 构建嵌套列表 形状根据 digits 确定
+        lengths = [ len( mapping[x] ) for x in digits ]
 
-        # 确定组合的长度
-        res_length = 1
-        for i in range(len(lengths)):
-            res_length *= lengths[i]
+        # 创建多维查询列表 维数对应 lengths 
+        res = [ [] for _ in lengths ]
 
-        # 据此可初始化答案列表
-        res = [''] * res_length
+        # 逐层填充
+        for i, digit in enumerate(digits):
+            res[i] = mapping[digit]
 
-        # 第一个字符将会平均分配给后面的组合 而其长度都等于 res_length // lengths[0]
-        # 据此构建一个循环 先后分配
+        # 逐层合并
+        for i in range(len(res) - 1):
+            res[i + 1] = [ x+y for x in res[i] for y in res[i + 1] ]
 
-        for i, digit in enumerate(digits):  # 对于每一个字符 查询其需要重复分配多少次
-            repeat = res_length // lengths[i]
-            for j in range(repeat):  # 对于每一个重复次数
-                
-
-            
-        
-        
+        return res[-1]
+    
 # @lc code=end
 

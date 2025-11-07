@@ -18,7 +18,6 @@ class Solution:
         nums.sort()
 
         # 3 遍历
-
         for i in range(len(nums)): 
             
             # 如果 nums[i] > 0 则不可能有解
