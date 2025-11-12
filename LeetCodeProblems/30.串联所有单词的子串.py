@@ -54,7 +54,32 @@ class Solution:
         # 特判
         if not s or not words: return []
 
-        # 统计 words 中每个单词出现的次数
+        # 统计单词长度 (每个单词都等长度)
+        one_word = len(words[0])
+        word_num = len(words) 
+        n = len(s)
+
+        if n < one_word: return []
+
+        words = Counter(words)
+        res = []
+        for i in range(one_word): 
+            cur_cnt = 0 
+            left, right = i, i
+            cur_Counter = Counter()
+            while right + one_word <= n: # right + one_word 是下一个单词的起始位置
+                w = s[right: right + one_word] 
+                right += one_word
+                cur_Counter[w] += 1
+                cur_cnt += 1
+                while cur_Counter[w] > words[w]:
+                    left_w = s[left: left + one_word]
+                    left += one_word
+                    cur_Counter[left_w] -= 1
+                    cur_cnt -= 1
+                if cur_cnt == word_num:
+                    res.append(left)
+        return res
 
 # @lc code=end
 
